@@ -5,6 +5,9 @@ from glob import glob
 from subprocess import call
 
 import click
+from flask.cli import with_appcontext
+
+from movie_knight.extensions import db
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.join(HERE, os.pardir)
@@ -63,3 +66,11 @@ def lint(fix_imports, check):
         execute_tool("Fixing import order", "isort", *isort_args)
     execute_tool("Formatting style", "black", *black_args)
     execute_tool("Checking code style", "flake8")
+
+
+@click.command()
+@with_appcontext
+def socialdb():
+    """Create social auth tables."""
+    from social_flask_sqlalchemy import models
+    models.PSABase.metadata.create_all(db.engine)

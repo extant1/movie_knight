@@ -84,3 +84,17 @@ footer .footer-nav {
   margin-right: 25px;
   list-style: none;
 }
+
+a.no-underline:link {
+  text-decoration: none;
+}
+
+.streamer {
+    background-color: white;
+    display: inline-block;
+
+}
+
+.streamer img:hover {
+    opacity: .5;
+}

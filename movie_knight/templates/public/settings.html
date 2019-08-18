@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <form action="{{ url_for('public.settings') }}" method="post">
+            {#            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>#}
+            {{ form.csrf_token }}
+            <div class="form-group">
+                <label for="formGroupExampleInput">Change your nickname</label>
+                <div class="input-group mb-3">
+                    <input id="nickname" name="nickname" type="text" class="form-control" placeholder="Change nickname"
+                           value="{% if current_user.nickname %}{{ current_user.nickname }}{% endif %}"
+                           aria-label="Recipient's username" aria-describedby="button-nickname">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="button-nickname">Change</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Stream key</label>
+            <div class="input-group mb-3">
+                <input id="stream-key" type="text" class="form-control" value="{{ current_user.stream.key }}" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-copy" onclick="copyKey()">Copy
+                        to clipboard
+                    </button>
+                    {% if not current_user.stream.key %}
+                        <a class="btn btn-primary"  href="{{ url_for('public.set_key') }}" role="button">Create Key</a>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ url_for('public.set_key') }}" role="button">Change Key</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ super() }}
+    <script>
+      function copyKey() {
+        var copyKey = document.getElementById('stream-key');
+        copyKey.select();
+        document.execCommand('copy');
+      }
+    </script>
+{% endblock %}

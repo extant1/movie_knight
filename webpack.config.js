@@ -11,7 +11,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const debug = (process.env.NODE_ENV !== 'production');
 
 // Development asset host (webpack dev server)
-const publicHost = debug ? 'http://0.0.0.0:2992' : '';
+const publicHost = debug ? 'http://127.0.0.1:2992' : '';
 
 const rootAssetPath = path.join(__dirname, 'assets');
 
@@ -22,13 +22,14 @@ module.exports = {
     main_js: './assets/js/main',
     main_css: [
       path.join(__dirname, 'node_modules', 'font-awesome', 'css', 'font-awesome.css'),
+      path.join(__dirname, 'node_modules', '@fortawesome', 'fontawesome-free', 'css', 'all.css'),
       path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css', 'bootstrap.css'),
       path.join(__dirname, 'assets', 'css', 'style.css'),
     ],
   },
   output: {
-    path: path.join(__dirname, 'movie_knight', 'static', 'build'),
-    publicPath: `${publicHost}/static/build/`,
+    path: path.join(__dirname, 'movie_knight', 'static', 'public'),
+    publicPath: `${publicHost}/static/public/`,
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].js',
   },
@@ -80,6 +81,7 @@ module.exports = {
     new ManifestRevisionPlugin(path.join(__dirname, 'movie_knight', 'webpack', 'manifest.json'), {
       rootAssetPath,
       ignorePaths: ['/js', '/css'],
+      extensionsRegex: /\.(ttf|eot|svg|png|jpe?g|gif|ico)$/i,
     }),
   ].concat(debug ? [] : [
     // production webpack plugins go here
