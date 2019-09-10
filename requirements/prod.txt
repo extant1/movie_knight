@@ -19,6 +19,7 @@ WTForms==2.2.1
 # Deployment
 gevent==1.4.0
 gunicorn>=19.9.0
+gunicorn[gevent]
 supervisor==4.0.2
 
 # Webpack
@@ -39,3 +40,12 @@ environs==5.2.1
 
 # SQLALchemy-utils
 sqlalchemy-utils==0.34.1
+
+# permissions for flask
+permission==0.4.1
+
+# social auth
+social-auth-app-flask==1.0.0
+social-auth-app-flask-sqlalchemy==1.0.1
+social-auth-core==3.2.0
+social-auth-storage-sqlalchemy==1.1.0
