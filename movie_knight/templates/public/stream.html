@@ -33,11 +33,17 @@
 {% endblock %}
 
 {% block js %}
+    {{ super() }}
     <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
     <script>
       var player = videojs('streaming');
       player.poster('{{ stream.avatarfull }}');
-      player.play();
+      player.brand({
+        image: '{{ asset_url_for('img/chess-knight-solid.svg') }}',
+        title: 'Movie Knight',
+        destination: 'http://m.theuberserver.com',
+        destinationTarget: '_top'
+      });
+      {#player.play();#}
     </script>
-    {{ super() }}
 {% endblock %}

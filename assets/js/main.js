@@ -9,6 +9,9 @@ require('@fortawesome/fontawesome-free');
 require('jquery');
 require('popper.js');
 require('bootstrap');
+require('videojs-brand');
+// require('video.js');
+
 
 // Your own code
 require('./plugins.js');
