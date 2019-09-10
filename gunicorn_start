@@ -1,6 +1,6 @@
 #!/bin/bash
 NAME="movie_knight"										# Name of the application
-APPDIR=/var/www/webapp/movie_knight/movie_knight				# project directory
+APPDIR=/var/www/webapp/movie_knight				# project directory
 SOCKFILE=/var/www/webapp/movie_knight/run/gunicorn.sock		# we will communicate using this unix socket
 NUM_WORKERS=2											# how many worker processes should Gunicorn spawn
 USER=www-data
@@ -18,7 +18,7 @@ RUNDIR=$(dirname $SOCKFILE)
 test -d $RUNDIR || mkdir -p $RUNDIR
 
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec ../venv/bin/gunicorn autoapp:app \
+exec venv/bin/gunicorn autoapp:app \
   --name $NAME \
   --workers $NUM_WORKERS \
   --worker-class gevent \
