@@ -1,0 +1,28 @@
+#!/bin/bash
+NAME="movie_knight"										# Name of the application
+APPDIR=/var/www/movie_knight/movie_knight				# project directory
+SOCKFILE=/var/www/movie_knight/run/gunicorn.sock		# we will communicate using this unix socket
+NUM_WORKERS=2											# how many worker processes should Gunicorn spawn
+USER=www-data
+GROUP=www-data
+
+echo "Starting $NAME as `whoami`"
+
+# Activate the virtual environment
+cd $APPDIR
+source ../venv/bin/activate
+export PYTHONPATH=$VENVDIR:$PYTHONPATH
+
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+# Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
+exec ../venv/bin/gunicorn autoapp:app \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --worker-class gevent \
+  --user=$USER --group=$GROUP \
+  --bind=unix:$SOCKFILE \
+  --log-level=debug \
+  --log-file=-
