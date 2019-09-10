@@ -1,7 +1,7 @@
 #!/bin/bash
 NAME="movie_knight"										# Name of the application
-APPDIR=/var/www/movie_knight/movie_knight				# project directory
-SOCKFILE=/var/www/movie_knight/run/gunicorn.sock		# we will communicate using this unix socket
+APPDIR=/var/www/webapp/movie_knight/movie_knight				# project directory
+SOCKFILE=/var/www/webapp/movie_knight/run/gunicorn.sock		# we will communicate using this unix socket
 NUM_WORKERS=2											# how many worker processes should Gunicorn spawn
 USER=www-data
 GROUP=www-data
