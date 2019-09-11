@@ -53,7 +53,10 @@ def settings():
 @blueprint.route("/settings/get-key", methods=["GET"])
 @UserPermission()
 def set_key():
-    current_user.stream.change_stream_key()
+    if current_user.stream:
+        current_user.stream.change_stream_key()
+    else:
+        Stream.create(user_id=current_user.id)
     return redirect(url_for('public.settings'))
 
 
