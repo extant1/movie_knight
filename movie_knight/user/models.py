@@ -188,4 +188,5 @@ class Stream(SurrogatePK, Model):
         db.session.commit()
 
     def __repr__(self):
-        return '{key!r}'.format(key=self.key)
+        # return '{key!r}'.format(key=self.key)
+        return '{name!r}'.format(name=self.user.get_name)
