@@ -8,7 +8,7 @@ from flask import (
     abort,
 )
 
-from movie_knight.extensions import login_manager
+from movie_knight.extensions import login_manager, csrf_protect
 from movie_knight.user.models import User, Stream
 
 blueprint = Blueprint("backend", __name__, static_folder="../static", url_prefix='/backend')
@@ -21,6 +21,7 @@ def load_user(user_id):
 
 
 @blueprint.route("/on_publish", methods=["POST"])
+@csrf_protect.exempt
 def on_publish():
     """rtmp on_publish"""
 
@@ -37,6 +38,7 @@ def on_publish():
 
 
 @blueprint.route("/on_publish_done", methods=["POST"])
+@csrf_protect.exempt
 def on_publish_done():
     """rtmp on_publish_done"""
 
