@@ -189,4 +189,4 @@ class Stream(SurrogatePK, Model):
 
     def __repr__(self):
         # return '{key!r}'.format(key=self.key)
-        return '{name!r}'.format(name=self.user.get_name)
+        return '{key!r}'.format(key=self.key)
