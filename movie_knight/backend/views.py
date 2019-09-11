@@ -33,7 +33,7 @@ def on_publish():
         abort(403)
     else:
         stream.live_now()
-        return redirect('https://m.theuberserver.com/{username}'.format(username=stream.user.get_name))
+        return redirect('{username}'.format(username=stream.user.get_name))
     abort(403)
 
 
