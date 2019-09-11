@@ -33,7 +33,7 @@ def on_publish():
         abort(403)
     else:
         stream.live_now()
-        return redirect(url_for('public.stream', username=stream.user.get_name, _external=True), 302)
+        return url_for('public.stream', username=stream.user.get_name, _external=True)
     abort(403)
 
 
