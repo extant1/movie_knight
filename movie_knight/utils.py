@@ -35,12 +35,3 @@ def add_user_role(user, details, *args, **kwargs):
         db.session.add(user)
         db.session.commit()
         current_app.logger.info("Adding [{role}] to [{user}]".format(role=user_role.name, user=user.id))
-
-
-# process invitation
-def use_invite_code(invitation):
-    if invitation.valid():
-        invitation.invitee_id = current_user.id
-        role = Role.get_by_name(invitation.role)
-        current_user.add_role(role)
-        invitation.used_on = dt.datetime.utcnow()

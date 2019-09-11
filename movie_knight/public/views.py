@@ -32,7 +32,10 @@ def load_user(user_id):
 def home():
     """Home page."""
     form = RedeemInviteForm()
-    streams = db.session.query(Stream).join(User).filter(and_(Stream.live_at, User.active)).all()
+    if UserPermission().check():
+        streams = db.session.query(Stream).join(User).filter(and_(Stream.live_at, User.active)).all()
+    else:
+        streams = None
     return render_template("public/home.html", streams=streams, form=form)
 
 

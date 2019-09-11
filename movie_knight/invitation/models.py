@@ -3,6 +3,7 @@
 import datetime as dt
 from uuid import uuid4
 
+from flask import flash
 from sqlalchemy_utils import UUIDType
 from flask_login import current_user
 
@@ -48,6 +49,9 @@ class Invitation(SurrogatePK, Model):
             role = Role.get_by_name(self.role)
             current_user.add_role(role)
             self.used_on = dt.datetime.utcnow()
+            flash('You have been assigned the role {role}.'.format(role=self.role), category='info')
+        else:
+            flash("Invalid Code.", category='warning')
 
     def invalidate(self):
         self.invalidated_on = dt.datetime.utcnow()

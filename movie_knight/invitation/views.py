@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Public section, including homepage and signup."""
 import datetime as dt
+import re
+
 from flask import (
     Blueprint,
     current_app,
@@ -10,7 +12,7 @@ from flask import (
     request,
     url_for,
 )
-from flask_login import current_user
+from flask_login import current_user, login_required
 from sqlalchemy import and_
 
 from movie_knight.extensions import login_manager, db
@@ -29,14 +31,22 @@ def load_user(user_id):
 
 
 @blueprint.route('/redeem', methods=['POST'])
-@UserPermission()
+@login_required
 def redeem():
     form = RedeemInviteForm()
     if form.validate_on_submit():
         code = form.code.data.lower()
-        invitation = Invitation.query.filter_by(code=code).first()
-        invitation.use_invite_code()
-        flash('You have been assigned the role {role}.'.format(role=invitation.role), category='info')
+
+        regex = r"[a-f0-9]{8}-?[a-f0-9]{4}-?[a-f0-9]{4}-?[a-f0-9]{4}-?[a-f0-9]{12}"
+        matches = re.findall(regex, code)
+        if len(matches) > 0:
+            invitation = Invitation.query.filter_by(code=matches[0]).first()
+            if invitation:
+                invitation.use_invite_code()
+            else:
+                flash('Invalid Code.', category='warning')
+        else:
+            flash('Invalid Code.', category='warning')
     return redirect(url_for('public.home'))
 
 

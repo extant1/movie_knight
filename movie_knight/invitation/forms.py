@@ -2,11 +2,22 @@
 """Public forms."""
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, DataRequired
 
 
 class RedeemInviteForm(FlaskForm):
     code = StringField("Redeem code")
+
+    def __init__(self, *args, **kwargs):
+        """Create instance."""
+        super(RedeemInviteForm, self).__init__(*args, **kwargs)
+
+    def validate(self):
+        """Validate the form."""
+        initial_validation = super(RedeemInviteForm, self).validate()
+        if not initial_validation:
+            return False
+        return True
 
 
 class CreateInviteForm(FlaskForm):
@@ -21,5 +32,16 @@ class CreateInviteForm(FlaskForm):
 
     def validate(self):
         """Validate the form."""
-        # Don't know why the select field seems to be invalid and won't pass .validate/validate_on_submit
         return True
+    # def __init__(self, *args, **kwargs):
+    #     """Create instance."""
+    #     super(CreateInviteForm, self).__init__(*args, **kwargs)
+    #
+    # def validate(self):
+    #     """Validate the form."""
+    #     initial_validation = super(CreateInviteForm, self).validate()
+    #     print(initial_validation)
+    #     if not initial_validation:
+    #         return False
+    #     print("valid")
+    #     return True
