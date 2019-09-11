@@ -20,7 +20,7 @@ def load_user(user_id):
     return User.get_by_id(int(user_id))
 
 
-@blueprint.route("/on_publish", methods=["POST"])
+@blueprint.route("/on_publish/", methods=["POST"])
 @csrf_protect.exempt
 def on_publish():
     """rtmp on_publish"""
@@ -37,7 +37,7 @@ def on_publish():
     abort(403)
 
 
-@blueprint.route("/on_publish_done", methods=["POST"])
+@blueprint.route("/on_publish_done/", methods=["POST"])
 @csrf_protect.exempt
 def on_publish_done():
     """rtmp on_publish_done"""
