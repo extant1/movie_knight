@@ -15,7 +15,7 @@
         <div class="col s12">
             <div class="card accent-shade white-text">
                 <div class="card-image">
-                    <video id="streaming" class="responsive-video video-js vjs-default-skin vjs-fluid" controls>
+                    <video id="streaming" class="responsive-video video-js vjs-default-skin vjs-fluid" controls autoplay>
                         <source src="https://ls.theuberserver.com/live/{{ username }}/index.m3u8"
                                 type="application/x-mpegURL">
                         <p class="vjs-no-js">
@@ -44,6 +44,5 @@
         destination: 'http://m.theuberserver.com',
         destinationTarget: '_top'
       });
-      player.play();
     </script>
 {% endblock %}
