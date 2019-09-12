@@ -34,7 +34,7 @@ def on_publish():
     else:
         stream.live_now()
         # return stream.user.get_name
-        return redirect(url_for('public.stream', username=stream.user.get_name, _external=False))
+        return redirect(url_for('public.stream', username=stream.user.get_name, _external=False), 302)
     abort(403)
 
 
