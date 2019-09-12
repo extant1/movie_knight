@@ -10,6 +10,7 @@ from flask import (
 
 from movie_knight.extensions import login_manager, csrf_protect
 from movie_knight.user.models import User, Stream
+from movie_knight.utils import movie_redirect
 
 blueprint = Blueprint("backend", __name__, static_folder="../static", url_prefix='/backend')
 
@@ -34,7 +35,7 @@ def on_publish():
     else:
         stream.live_now()
         # return stream.user.get_name
-        return redirect("" + stream.user.get_name, 302)
+        return movie_redirect(stream.user.get_name, 302)
     abort(403)
 
 
