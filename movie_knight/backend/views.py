@@ -35,7 +35,7 @@ def on_publish():
     else:
         stream.live_now()
         # return stream.user.get_name
-        return movie_redirect(stream.user.get_name, 302)
+        return movie_redirect("Whiskey2", 302)
     abort(403)
 
 
