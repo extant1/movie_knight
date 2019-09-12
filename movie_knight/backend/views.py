@@ -34,7 +34,7 @@ def on_publish():
     else:
         stream.live_now()
         # return stream.user.get_name
-        return redirect("https://m.theuberserver.com/" + stream.user.get_name, 302)
+        return redirect("" + stream.user.get_name, 302)
     abort(403)
 
 
