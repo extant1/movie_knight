@@ -64,7 +64,7 @@ def movie_redirect(location, code=302, Response=None):
         "<h1>Redirecting...</h1>\n"
         "<p>You should be redirected automatically to target URL: "
         '<a href="%s">%s</a>.  If not click the link.'
-        % (escape(location)),
+        % (escape(location), location),
         code,
         mimetype="text/html",
     )
