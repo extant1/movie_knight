@@ -55,6 +55,7 @@ def redeem():
 def manage():
     form = CreateInviteForm()
     now = dt.datetime.utcnow()
+    # TODO: Add pagination
     invitations = Invitation.query.filter_by(inviter_id=current_user.id).filter_by(invalidated_on=None).order_by(
         Invitation.expires.desc()).all()
     return render_template('invite/manage.html', invitations=invitations, now=now, form=form)
