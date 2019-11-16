@@ -12,9 +12,7 @@ from movie_knight.database import (
     Column,
     Model,
     SurrogatePK,
-    db,
-    reference_col,
-    relationship,
+    db
 )
 
 

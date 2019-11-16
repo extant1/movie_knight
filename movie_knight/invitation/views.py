@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Public section, including homepage and signup."""
-import datetime as dt
+from datetime import datetime
 import re
 
 from flask import (
@@ -13,9 +13,8 @@ from flask import (
     url_for,
 )
 from flask_login import current_user, login_required
-from sqlalchemy import and_
 
-from movie_knight.extensions import login_manager, db
+from movie_knight.extensions import login_manager
 from movie_knight.user.models import User
 from movie_knight.invitation.models import Invitation
 from movie_knight.invitation.forms import RedeemInviteForm, CreateInviteForm
@@ -77,7 +76,7 @@ def create():
 def invalidate(invitation_id):
     invite = Invitation.query.filter_by(id=invitation_id).first()
     if current_user.id == invite.inviter_id or AdminPermission.check():
-        invite.update(invalidated_on=dt.datetime.utcnow())
+        invite.update(invalidated_on=datetime.utcnow())
         flash('Code has been invalidated', category='warning')
         return redirect(url_for('invite.manage'))
     else:

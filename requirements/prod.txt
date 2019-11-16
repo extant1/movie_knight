@@ -36,7 +36,7 @@ Flask-Caching>=1.7.2
 Flask-DebugToolbar==0.10.1
 
 # Environment variable parsing
-environs==5.2.1
+environs==6.1.0
 
 # SQLALchemy-utils
 sqlalchemy-utils==0.34.1
