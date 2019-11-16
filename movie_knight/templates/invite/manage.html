@@ -4,11 +4,16 @@
         <h1>Friend Codes</h1>
         <table class="table">
             <thead class="thead-dark">
+{#            <tr>#}
+{#                <th scope="col">Code</th>#}
+{#                <th scope="col">Expiration</th>#}
+{#                <th scope="col">Used by</th>#}
+{#                <th scope="col">Used</th>#}
+{#                <th></th>#}
+{#            </tr>#}
             <tr>
-                <th scope="col">Code</th>
-                <th scope="col">Expiration</th>
-                <th scope="col">Used by</th>
-                <th scope="col">Used</th>
+                <th>Code</th>
+                <th>Status</th>
                 <th></th>
             </tr>
             </thead>
@@ -41,17 +46,17 @@
                             {% endif %}
                         </div>
                     </td>
+                    {# used, expired, valid #}
                     {% if invite.invitee_id %}
-                        <td></td>
-                        <td>{{ invite.invitee.get_name }}</td>
-                        <td>{{ moment(invite.used_on).fromTime(now) }}</td>
-                    {% else %}
-                        <td colspan="3">{{ moment(invite.expires).fromTime(now) }}</td>
+                        <td colspan="2">Claimed by {{ invite.invitee.get_name }}, {{ moment(invite.used_on).fromTime(now) }}</td>
+                    {% elif invite.expired() %}
+                        <td colspan="2">Expired {{ moment(invite.expires).fromTime(now) }}</td>
+                    {% else  %}
+                        <td>Expires {{ moment(invite.expires).fromTime(now) }}</td>
                     {% endif %}
+                    {# Invalidate #}
                     {% if invite.valid() %}
-                        <td><a href="{{ url_for('invite.invalidate', invitation_id=invite.id) }}"><i class="fas fa-2x fa-times-circle text-danger"></i></a></td>
-                    {% else %}
-                        <td></td>
+                        <td><a href="{{ url_for('invite.invalidate', invitation_id=invite.id) }}" alt="Expire"><i class="fas fa-2x fa-times-circle text-danger"></i></a></td>
                     {% endif %}
                 </tr>
             {% endfor %}

@@ -19,7 +19,7 @@ from movie_knight.extensions import login_manager, db
 from movie_knight.user.models import User
 from movie_knight.invitation.models import Invitation
 from movie_knight.invitation.forms import RedeemInviteForm, CreateInviteForm
-from movie_knight.permissions import UserPermission
+from movie_knight.permissions import UserPermission, AdminPermission
 
 blueprint = Blueprint("invite", __name__, static_folder="../static", url_prefix='/invite')
 
@@ -75,5 +75,10 @@ def create():
 @UserPermission()
 def invalidate(invitation_id):
     invite = Invitation.query.filter_by(id=invitation_id).first()
-    invite.update(invalidated_on=dt.datetime.utcnow())
+    if current_user.id == invite.inviter_id or AdminPermission.check():
+        invite.update(invalidated_on=dt.datetime.utcnow())
+        flash('Code has been invalidated', category='warning')
+        return redirect(url_for('invite.manage'))
+    else:
+        return redirect(url_for('invite.manage'))
     return redirect(url_for('invite.manage'))

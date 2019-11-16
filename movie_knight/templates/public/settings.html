@@ -2,7 +2,6 @@
 {% block content %}
     <div class="container">
         <form action="{{ url_for('public.settings') }}" method="post">
-            {#            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>#}
             {{ form.csrf_token }}
             <div class="form-group">
                 <label for="formGroupExampleInput">Change your nickname</label>

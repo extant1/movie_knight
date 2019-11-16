@@ -43,6 +43,11 @@ class Invitation(SurrogatePK, Model):
             return False
         return True
 
+    def expired(self):
+        if self.expires >= dt.datetime.utcnow():
+            return False
+        return True
+
     def use_invite_code(self):
         if self.valid():
             self.invitee_id = current_user.id
@@ -61,14 +66,14 @@ class Invitation(SurrogatePK, Model):
         if self.invalidated_on:
             # invalid
             return 'warning'
-        if self.expires <= dt.datetime.utcnow():
-            # expired
-            return 'danger'
         if self.invitee_id is not None:
             # used
             return 'success'
+        if self.expires <= dt.datetime.utcnow():
+            # expired
+            return 'secondary'
         else:
-            # unused
+            # valid
             return 'primary'
 
     def __repr__(self):
