@@ -8,7 +8,7 @@
                         {% for stream in streams %}
                             <div class="card streamer" style="width: 10rem; min-width: 10rem;">
                                 <a href="{{ url_for('public.stream', username=stream.user.get_name) }}"><img
-                                        class="rounded-circle mx-auto d-block" style="width: 9rem;"
+                                        class="rounded-circle mx-auto d-block"
                                         src="{{ stream.user.avatarfull }}"
                                         class="card-img-top"
                                         alt="{{ stream.user.get_name }}"></a>

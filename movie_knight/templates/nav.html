@@ -15,8 +15,7 @@
                     </li>
                     {% if current_user.stream %}
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('public.stream', username=current_user.get_name) }}">My
-                                Stream</a>
+                            <a class="nav-link" href="{{ url_for('public.stream', username=current_user.get_name) }}">Copy Stream Link</a>
                         </li>
                     {% endif %}
                     <li class="nav-item active">
