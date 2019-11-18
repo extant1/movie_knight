@@ -13,11 +13,6 @@
                         <a class="nav-link" href="{{ url_for('public.home') }}">Stream List<span
                                 class="sr-only">(current)</span></a>
                     </li>
-                    {% if current_user.stream %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url_for('public.stream', username=current_user.get_name) }}">Copy Stream Link</a>
-                        </li>
-                    {% endif %}
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ url_for('invite.manage') }}">Invite Friends</a>
                     </li>
