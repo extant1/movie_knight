@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Public section, including homepage and signup."""
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
 
 from flask import (
@@ -53,7 +53,7 @@ def redeem():
 @UserPermission()
 def manage():
     form = CreateInviteForm()
-    now = dt.datetime.utcnow()
+    now = datetime.utcnow()
     # TODO: Add pagination
     invitations = Invitation.query.filter_by(inviter_id=current_user.id).filter_by(invalidated_on=None).order_by(
         Invitation.expires.desc()).all()
@@ -66,7 +66,7 @@ def create():
     form = CreateInviteForm()
     if form.validate_on_submit():
         Invitation.create(inviter_id=current_user.id,
-                          expires=(dt.datetime.utcnow() + dt.timedelta(hours=int(form.expires.data))),
+                          expires=(datetime.utcnow() + timedelta(hours=int(form.expires.data))),
                           role='user')
     return redirect(url_for('invite.manage'))
 
