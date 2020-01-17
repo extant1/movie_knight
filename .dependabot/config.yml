@@ -1,10 +1,7 @@
 version: 1
 update_configs:
   - package_manager: "python"
-    directory: "/requirements/prod"
-    update_schedule: "live"
-  - package_manager: "python"
-    directory: "/requirements/dev"
+    directory: "/requirements"
     update_schedule: "live"
   - package_manager: "javascript"
     directory: "/"
