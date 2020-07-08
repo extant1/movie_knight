@@ -47,7 +47,7 @@ permission==0.4.1
 # social auth
 social-auth-app-flask==1.0.0
 social-auth-app-flask-sqlalchemy==1.0.1
-social-auth-core==3.2.0
+social-auth-core==3.3.3
 social-auth-storage-sqlalchemy==1.1.0
 
 # flask moment
