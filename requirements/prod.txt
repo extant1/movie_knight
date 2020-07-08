@@ -1,7 +1,7 @@
 # Everything needed in production
 
 # Flask
-Flask==1.1.1
+Flask==1.1.2
 Werkzeug==0.15.5
 click>=5.0
 
