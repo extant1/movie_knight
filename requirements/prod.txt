@@ -20,7 +20,7 @@ WTForms==2.3.1
 gevent==20.6.2
 gunicorn>=19.9.0
 gunicorn[gevent]==20.0.4
-supervisor==4.0.2
+supervisor==4.2.0
 
 # Webpack
 flask-webpack==0.1.0
