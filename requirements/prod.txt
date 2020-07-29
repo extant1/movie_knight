@@ -3,7 +3,7 @@
 # Flask
 Flask==1.1.2
 Werkzeug==1.0.1
-click>=5.0
+click>=7.0
 
 # Database
 Flask-SQLAlchemy==2.4.4
@@ -18,7 +18,7 @@ WTForms==2.3.1
 
 # Deployment
 gevent==20.6.2
-gunicorn>=19.9.0
+gunicorn>=20.0.4
 gunicorn[gevent]==20.0.4
 supervisor==4.2.0
 
@@ -30,7 +30,7 @@ Flask-Login==0.5.0
 Flask-Bcrypt==0.7.1
 
 # Caching
-Flask-Caching>=1.7.2
+Flask-Caching>=1.9.0
 
 # Debug toolbar
 Flask-DebugToolbar==0.11.0
