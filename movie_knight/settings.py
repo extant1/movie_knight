@@ -32,7 +32,7 @@ SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
     'social_core.backends.steam.SteamOpenId',
 )
 SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player']
-SOCIAL_AUTH_STEAM_API_KEY = env.str("SOCIAL_AUTH_STEAM_API_KEY")
+SOCIAL_AUTH_STEAM_API_KEY = env.str("STEAM_API_KEY")
 
 SOCIAL_AUTH_PIPELINE = (
         'social_core.pipeline.social_auth.social_details',

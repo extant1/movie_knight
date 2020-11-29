@@ -6,7 +6,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_webpack import Webpack
+from flask_static_digest import FlaskStaticDigest
 from flask_wtf.csrf import CSRFProtect
 from flask_moment import Moment
 
@@ -17,5 +17,5 @@ db = SQLAlchemy()
 migrate = Migrate()
 cache = Cache()
 debug_toolbar = DebugToolbarExtension()
-webpack = Webpack()
+flask_static_digest = FlaskStaticDigest()
 moment = Moment()

@@ -7,6 +7,7 @@
 <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="{{static_url_for('static', filename='build/img/favicon.ico') }}">
     <title>{% block title %}
         Movie Knight
     {% endblock %}</title>
@@ -17,9 +18,12 @@
     <meta name="description" content="{% block meta_description %}{% endblock %}">
     <meta name="author" content="{% block meta_author %}{% endblock %}">
 
-    {{ stylesheet_tag('main_css') | safe }}
-    {% block css %}
-    {% endblock %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ static_url_for('static', filename='build/main_css.bundle.css') }}"
+    />
+    {% block css %}{% endblock %}
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -52,7 +56,7 @@
     {% include "footer.html" %}
 
     <!-- JavaScript-->
-    {{ javascript_tag('main_js') | safe }}
+    <script src="{{ static_url_for('static', filename='build/main_js.bundle.js') }}"></script>
     {% block js %}
         {{ moment.include_jquery() }}
         {{ moment.include_moment() }}

@@ -125,7 +125,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     @property
     def get_name(self):
-        if self.nickname is None or self.nickname is '':
+        if self.nickname is None or self.nickname == '':
             return str(self.username)
         else:
             return str(self.nickname)

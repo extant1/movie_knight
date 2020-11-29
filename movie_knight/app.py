@@ -17,7 +17,7 @@ from movie_knight.extensions import (
     debug_toolbar,
     login_manager,
     migrate,
-    webpack,
+    flask_static_digest,
 )
 
 
@@ -49,7 +49,7 @@ def register_extensions(app):
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
-    webpack.init_app(app)
+    flask_static_digest.init_app(app)
     init_social(app, db.session)
     return None
 

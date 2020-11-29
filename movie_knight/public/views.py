@@ -44,7 +44,7 @@ def home():
 def settings():
     form = NicknameForm()
     if form.validate_on_submit():
-        if form.nickname.data is '' or form.nickname.data is None:
+        if form.nickname.data == '' or form.nickname.data is None:
             current_user.nickname = None
         current_user.nickname = form.nickname.data
     return render_template("public/settings.html", form=form)

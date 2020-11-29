@@ -4,15 +4,18 @@ const webpack = require('webpack');
 /*
  * Webpack Plugins
  */
-const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// take debug mode from the environment
+const ProductionPlugins = [
+  // production webpack plugins go here
+  new webpack.DefinePlugin({
+    "process.env": {
+      NODE_ENV: JSON.stringify("production")
+    }
+  })
+]
+
 const debug = (process.env.NODE_ENV !== 'production');
-
-// Development asset host (webpack dev server)
-const publicHost = debug ? 'http://127.0.0.1:2992' : '';
-
 const rootAssetPath = path.join(__dirname, 'assets');
 
 module.exports = {
@@ -21,25 +24,26 @@ module.exports = {
   entry: {
     main_js: './assets/js/main',
     main_css: [
-      path.join(__dirname, 'node_modules', 'font-awesome', 'css', 'font-awesome.css'),
       path.join(__dirname, 'node_modules', '@fortawesome', 'fontawesome-free', 'css', 'all.css'),
       path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css', 'bootstrap.css'),
       path.join(__dirname, 'assets', 'css', 'style.css'),
     ],
   },
+  mode: debug,
   output: {
-    path: path.join(__dirname, 'movie_knight', 'static', 'public'),
-    publicPath: `${publicHost}/static/public/`,
-    filename: '[name].[hash].js',
-    chunkFilename: '[id].[hash].js',
+    chunkFilename: "[id].js",
+    filename: "[name].bundle.js",
+    path: path.join(__dirname, "movie_knight", "static", "build"),
+    publicPath: "/static/public/"
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: [".js", ".jsx", ".css"]
   },
-  devtool: 'source-map',
-  devServer: {
-    headers: { 'Access-Control-Allow-Origin': '*' },
-  },
+  devtool: debug ? "eval-source-map" : false,
+  plugins: [
+    new MiniCssExtractPlugin({ filename: "[name].bundle.css" }),
+    new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" })
+  ].concat(debug ? [] : ProductionPlugins),
   module: {
     rules: [
       {
@@ -48,7 +52,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: debug,
             },
           },
           'css-loader!less-loader',
@@ -60,7 +63,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: debug,
             },
           },
           'css-loader',
@@ -70,25 +72,10 @@ module.exports = {
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
       {
         test: /\.(ttf|eot|svg|png|jpe?g|gif|ico)(\?.*)?$/i,
-        loader: `file-loader?context=${rootAssetPath}&name=[path][name].[hash].[ext]`
+        loader: 'file-loader',
+        options: { context: '${rootAssetPath}&name=[path][name].[ext]' }
       },
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: { presets: ['env'], cacheDirectory: true } },
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', options: { presets: ["@babel/preset-env"], cacheDirectory: true } },
     ],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({ filename: '[name].[hash].css', }),
-    new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
-    new ManifestRevisionPlugin(path.join(__dirname, 'movie_knight', 'webpack', 'manifest.json'), {
-      rootAssetPath,
-      ignorePaths: ['/js', '/css'],
-      extensionsRegex: /\.(ttf|eot|svg|png|jpe?g|gif|ico)$/i,
-    }),
-  ].concat(debug ? [] : [
-    // production webpack plugins go here
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      }
-    }),
-  ]),
+  }
 };
