@@ -3,7 +3,8 @@
 <head>
     {% block title %}{{ stream.get_name }}'s Stream{% endblock %}
     {% block css %}
-        <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
+        <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet"/>
+
         <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
         <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
         {{ super() }}
@@ -15,12 +16,14 @@
         <div class="col s12">
             <div class="card accent-shade white-text">
                 <div class="card-image">
-                    <video id="streaming" class="responsive-video video-js vjs-default-skin vjs-fluid" controls autoplay>
+                    <video id="streaming" class="responsive-video video-js vjs-default-skin vjs-fluid" controls
+                           autoplay>
                         <source src="https://ls.theuberserver.com/live/{{ username }}/index.m3u8"
                                 type="application/x-mpegURL">
                         <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to a web browser that
-                            <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+                            To view this video please enable JavaScript, and consider upgrading to a
+                            web browser that
+                            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                         </p>
                     </video>
                 </div>
@@ -34,15 +37,15 @@
 
 {% block js %}
     {{ super() }}
-    <script src='https://vjs.zencdn.net/7.6.0/video.js'></script>
+    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
     <script>
-      var player = videojs('streaming');
-      player.poster('{{ stream.avatarfull }}');
-      player.brand({
-        image: '{{ asset_url_for('img/chess-knight-solid.svg') }}',
-        title: 'Movie Knight',
-        destination: 'http://m.theuberserver.com',
-        destinationTarget: '_top'
-      });
+        var player = videojs('streaming');
+        player.poster('{{ stream.avatarfull }}');
+        player.brand({
+            image: '{{ static_url_for('static', filename='img/chess-knight-solid.svg') }}',
+            title: 'Movie Knight',
+            destination: 'http://m.theuberserver.com',
+            destinationTarget: '_top'
+        });
     </script>
 {% endblock %}
