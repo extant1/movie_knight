@@ -23,7 +23,7 @@ gunicorn[gevent]==20.0.4
 supervisor==4.2.1
 
 # Webpack
-Flask-Static-Digest==0.1.4
+Flask-Static-Digest==0.2.1
 
 # Auth
 Flask-Login==0.5.0
