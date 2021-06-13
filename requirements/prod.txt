@@ -51,4 +51,4 @@ social-auth-core==4.1.0
 social-auth-storage-sqlalchemy==1.1.0
 
 # flask moment
-flask-moment==0.11.0
+flask-moment==1.0.1
