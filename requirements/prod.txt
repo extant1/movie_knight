@@ -7,7 +7,7 @@ click>=7.0
 
 # Database
 Flask-SQLAlchemy==2.4.4
-SQLAlchemy==1.4.12
+SQLAlchemy==1.4.22
 
 # Migrations
 Flask-Migrate==2.5.3
