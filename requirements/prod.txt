@@ -1,54 +1,54 @@
 # Everything needed in production
 
 # Flask
-Flask==1.1.2
-Werkzeug==1.0.1
-click>=7.0
+Flask
+Werkzeug
+click
 
 # Database
-Flask-SQLAlchemy==2.4.4
-SQLAlchemy==1.4.12
+Flask-SQLAlchemy
+SQLAlchemy
 
 # Migrations
-Flask-Migrate==2.5.3
+Flask-Migrate
 
 # Forms
-Flask-WTF==0.14.3
-WTForms==2.3.3
+Flask-WTF
+WTForms
 
 # Deployment
-gevent==21.1.2
-gunicorn>=20.0.4
-gunicorn[gevent]==20.1.0
-supervisor==4.2.1
+gevent
+gunicorn
+gunicorn[gevent]
+supervisor
 
 # Webpack
-Flask-Static-Digest==0.2.1
+Flask-Static-Digest
 
 # Auth
-Flask-Login==0.5.0
-Flask-Bcrypt==0.7.1
+Flask-Login
+Flask-Bcrypt
 
 # Caching
-Flask-Caching>=1.9.0
+Flask-Caching
 
 # Debug toolbar
-Flask-DebugToolbar==0.11.0
+Flask-DebugToolbar
 
 # Environment variable parsing
-environs==9.3.2
+environs
 
 # SQLALchemy-utils
-sqlalchemy-utils==0.37.0
+sqlalchemy-utils
 
 # permissions for flask
-permission==0.4.1
+permission
 
 # social auth
-social-auth-app-flask==1.0.0
-social-auth-app-flask-sqlalchemy==1.0.1
-social-auth-core==4.1.0
-social-auth-storage-sqlalchemy==1.1.0
+social-auth-app-flask
+social-auth-app-flask-sqlalchemy
+social-auth-core
+social-auth-storage-sqlalchemy
 
 # flask moment
-flask-moment==0.11.0
+flask-moment
